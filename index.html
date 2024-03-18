@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Party</title>
+    <title>Countdown</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,12 +14,36 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
+            /* Hide overflow to prevent scrollbars */
+        }
+
+        video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            transform: translate(-50%, -50%) scale(0.8);
+            /* transform: translate(-50%, -50%); */
+        }
+
+        /* body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             background-image: url('https://images.unsplash.com/photo-1709603945846-6901ed447ecd?q=80&w=1858&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-            /* Default background image */
             background-size: cover;
             background-position: center;
             animation: pulseBackground 10s infinite alternate;
-        }
+        } */
 
         @keyframes pulseBackground {
             0% {
@@ -81,21 +105,24 @@
             background-color: #cc0066;
             /* Darker pink */
         }
-
     </style>
 </head>
 
 <body>
+    <video autoplay muted loop>
+        <source src="images/cover.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <div id="countdown-container">
-        <h1>Countdown</h1>
+        <h1 id="title">Something is about to happen....?</h1>
         <div id="countdown"></div>
-        <div id="output"><button id="party-button">Let's Begin!</button></div>
+        <div id="output"><button id="party-button">Brace Yourself For An Awesome Journey</button></div>
     </div>
 
     <script>
         // Set the date we're counting down to
-        var countDownDate = new Date("March 11, 2024 13:00:00").getTime();
+        var countDownDate = new Date("May 14, 2023 00:00:00").getTime();
 
         // Update the countdown every second
         var x = setInterval(function () {
@@ -121,9 +148,25 @@
                 clearInterval(x);
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("output").style.display = "block";
+                document.getElementById("title").innerHTML = "Happy Birthday Ranjana!😍";
+                alert('Heartiest Welcome to a new you!');
 
-                // Change background image
-                document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1486134030336-39b1094bf33e?q=80&w=1907&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"; // New background image URL
+                var video = document.querySelector('video');
+                video.parentNode.removeChild(video);
+
+                document.body.style.backgroundImage = "url('images/cover2.jpg')";
+                document.body.style.backgroundSize = "cover";
+                document.body.style.backgroundPosition = "center";
+
+                window.addEventListener('resize', function () {
+                    if (window.innerWidth <= 768) { // Adjust the breakpoint as needed
+                        document.body.style.backgroundSize = "contain";
+                        document.body.style.backgroundPosition = "center";
+                    } else {
+                        document.body.style.backgroundSize = "cover";
+                        document.body.style.backgroundPosition = "center";
+                    }
+                });
             }
         }, 1000);
 
